@@ -1,0 +1,24 @@
+need a process to:
+* find all games and game ids
+* find all players and player ids
+* parse box scores for a game id
+
+
+to find game ids:
+
+from nba_api.stats.endpoints import leaguegamefinder
+# Query for games where the Celtics were playing
+#gamefinder = leaguegamefinder.LeagueGameFinder(team_id_nullable=celtics_id)
+gamefinder = leaguegamefinder.LeagueGameFinder()
+# The first DataFrame of those returned is what we want.
+games = gamefinder.get_data_frames()[0]
+games.head()
+
+
+to find a box score from a game id:
+from nba_api.stats.endpoints import boxscoreadvancedv2
+box_scores = boxscoreadvancedv2.BoxScoreAdvancedV2(game_id='0021800283')
+box_scores.get_data_frames()[0].head()
+
+to find the score of a game:
+from nba_api.stats.endpoints import boxscoresummaryv2
